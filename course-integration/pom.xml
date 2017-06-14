@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.skb</groupId>
+	<version>1.0.0</version>
+
+	<artifactId>course-integration</artifactId>
+	<packaging>jar</packaging>
+	<name>course-integration</name>
+	<url>http://maven.apache.org</url>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.skb</groupId>
+			<artifactId>skb-utils</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<!-- war插件 -->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.5.1</version>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+				<!-- 配置构建时忽略测试用例 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<configuration>
+						<skipTests>true</skipTests>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<!-- 指定天天象上Maven仓库 -->
+	<repositories>
+		<repository>
+			<id>central</id>
+			<url>
+                http://repository.jiyoutang.com/content/repositories/central/
+            </url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>thirdparty</id>
+			<url>
+                http://repository.jiyoutang.com/content/repositories/thirdparty/
+            </url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<!-- 指定天天象上Maven plugins仓库 -->
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>plugins-releases</name>
+			<url>http://repository.jiyoutang.com/content/repositories/central/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<snapshots />
+			<id>snapshots</id>
+			<name>plugins-snapshots</name>
+			<url>http://repository.jiyoutang.com/content/repositories/thirdparty/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<!-- 构建发布jar到远程仓库 -->
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<name>Releases</name>
+			<url>http://repository.jiyoutang.com/content/repositories/thirdparty/</url>
+		</repository>
+		<!-- <snapshotRepository> <id>nexus</id> <name>Snapshot</name> <url>http://repository.jiyoutang.com/content/repositories/releases/</url> 
+			</snapshotRepository> -->
+	</distributionManagement>
+</project>

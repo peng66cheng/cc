@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://code.alibabatech.com/schema/dubbo        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="${dsf.application.name}" />
+	<!-- 全局超时时间（毫秒） -->
+	<dubbo:provider timeout="${dsf.provider.timeout}" />
+	<!-- 暴露服务协议提供端口 -->
+	<dubbo:protocol port="${dsf.protocol.port}"/>
+	<!-- 使用zookeeper服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="${zookeeper.uri}"
+		file="${dubbo.cache.file}" />
+		
+	<!-- 目录接口 -->
+	<dubbo:service interface="com.skb.course.integration.service.DirectoryService" ref="directoryService" timeout="${dsf.provider.timeout}"  version="1.0.0"/>
+	<!-- 同步课程目录服务 -->
+	<dubbo:service interface="com.skb.course.integration.service.SyncDirectoryService" ref="syncDirectoryService" timeout="2000"/>
+	<!-- 同步课程服务接口 -->	
+	<dubbo:service interface="com.skb.course.integration.service.SyncCourseService" ref="syncCourseService" timeout="2000"/>
+	<!-- 基础课程服务接口 -->	
+	<dubbo:service interface="com.skb.course.integration.service.CourseService" ref="courseService" timeout="2000"/>
+	<!-- 知识点服务接口 -->	
+	<dubbo:service interface="com.skb.course.integration.service.KnowledgeService" ref="knowledgeService" timeout="2000"/>
+	<!-- 老师课程 -->
+	<dubbo:service interface="com.skb.course.integration.service.TeacherCourseService" ref="teacherCourseService" timeout="2000"/>
+	<!-- 老师资料 -->
+	<dubbo:service interface="com.skb.course.integration.service.DocumentService" ref="documentService" timeout="2000"/>
+		
+</beans>

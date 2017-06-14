@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%5p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%t] (%F:%L) %m%n"/>
+        </layout>
+    </appender>
+	
+	<appender name="DEFAULT-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Encoding" value="UTF-8" />
+		<param name="File" value="/data/logs/course-web/common-default.log" /> <!-- 日志路径，根据实际情况修改 -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%5p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%t] (%F:%L) %m%n" />
+		</layout>
+	</appender>
+	<!-- [公共Appender] 汇总错误 -->
+	<appender name="ERROR-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Encoding" value="UTF-8" />
+		<param name="File" value="/data/logs/course-web/common-error.log" />
+		<param name="threshold" value="warn" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%5p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%t] (%F:%L) %m%n" />
+		</layout> 
+	</appender>
+ 
+	<!-- DSF日志 statrt -->
+	<appender name="dsf-registry" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/data/logs/dsf/dsf-registry.log" />
+		<param name="append" value="true" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%5p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%t] (%F:%L) %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.alibaba.dubbo.registry" additivity="false"> 
+		<level value="info" />     
+		<appender-ref ref="dsf-registry" />
+		<appender-ref ref="ERROR-APPENDER" />
+	</logger>
+
+	<appender name="dsf-monitor" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/data/logs/dsf/dsf-monitor.log" />
+		<param name="append" value="true" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%5p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%t] (%F:%L) %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.alibaba.dubbo.monitor" additivity="false">  
+		<level value="info" />     
+		<appender-ref ref="dsf-monitor" />
+		<appender-ref ref="ERROR-APPENDER" />
+	</logger>
+	<appender name="dsf-config" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/data/logs/dsf/dsf-config.log" />
+		<param name="append" value="true" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%5p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%t] (%F:%L) %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.alibaba.dubbo.config" additivity="false">  
+		<level value="info" />       
+		<appender-ref ref="dsf-config" />
+		<appender-ref ref="ERROR-APPENDER" />
+	</logger>
+	<appender name="dsf-remoting" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/data/logs/dsf/dsf-remoting.log" />
+		<param name="append" value="true" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%5p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%t] (%F:%L) %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.alibaba.dubbo.remoting" additivity="false">  
+		<level value="info" />     
+		<appender-ref ref="dsf-remoting" />
+		<appender-ref ref="ERROR-APPENDER" />
+	</logger>
+
+	<appender name="dsf-rpc" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/data/logs/dsf/dsf-rpc.log" />
+		<param name="append" value="true" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%5p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%t] (%F:%L) %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.alibaba.dubbo.rpc" additivity="false"> 
+		<level value="info" />    
+		<appender-ref ref="dsf-rpc" />
+		<appender-ref ref="ERROR-APPENDER" />
+	</logger>
+	
+	<appender name="dsf-default" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/data/logs/dsf/dsf-default.log" />
+		<param name="append" value="true" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%5p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%t] (%F:%L) %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.alibaba.dubbo" additivity="false">
+		<level value="info" />      
+		<appender-ref ref="dsf-default" />
+		<appender-ref ref="ERROR-APPENDER" />
+	</logger>
+	<!-- DSF日志end -->
+
+	<!-- TRACE < DEBUG < INFO < WARN < ERROR < FATAL -->
+	<root>
+		<level value="WARN" />       <!-- print warn、error-->
+		<appender-ref ref="DEFAULT-APPENDER" />
+		<appender-ref ref="ERROR-APPENDER" />
+		<priority value="INFO"/> <!-- 根据实际情况修改日志级别，一般线上是INFO以上  -->
+       <appender-ref ref="CONSOLE"/><!--  --><!-- 该appender需要在上线时删除，以免输出重复的日志到catalina.out文件 -->
+	</root>
+</log4j:configuration>
